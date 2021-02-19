@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * To provide a date-time on the creation of a recipe,
@@ -28,8 +30,7 @@ public class DateMapper {
     }
     public Timestamp asTimestamp(OffsetDateTime offsetDateTime){
         if(offsetDateTime !=null){
-            return Timestamp.valueOf(offsetDateTime.atZoneSameInstant(
-                    ZoneOffset.UTC).toLocalDateTime());
+            return Timestamp.valueOf(offsetDateTime.atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
         }else{
             return null;
         }

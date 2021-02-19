@@ -1,0 +1,36 @@
+|===
+|Path|Type|Description
+
+|`+recipeId+`
+|`+class java.util.UUID+`
+|Recipe Id
+
+|`+recipeName+`
+|`+String+`
+|Recipe Name
+
+|`+cookingTime+`
+|`+Number+`
+|Recipe cooking time
+
+|`+preparationTime+`
+|`+Number+`
+|Recipe preparation time
+
+|`+amountServings+`
+|`+Number+`
+|Recipe amount of servings
+
+|`+totalTime+`
+|`+Number+`
+|Recipe total time of preparation including cooking time
+
+|`+createdDate+`
+|`+class java.time.OffsetDateTime+`
+|Date of creation
+
+|`+lastUpdatedDate+`
+|`+class java.time.OffsetDateTime+`
+|Last update
+
+|===
