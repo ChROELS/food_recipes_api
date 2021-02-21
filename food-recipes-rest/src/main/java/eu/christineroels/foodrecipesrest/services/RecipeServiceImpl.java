@@ -48,8 +48,8 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void saveNewRecipe(RecipeDto recipeDto) {
+    public RecipeDto saveNewRecipe(RecipeDto recipeDto) {
        Recipe recipe = recipeMapper.recipeDtoToRecipe(recipeDto);
-       recipeRepository.save(recipe);
+       return recipeMapper.recipeToRecipeDto(recipeRepository.save(recipe));
     }
 }

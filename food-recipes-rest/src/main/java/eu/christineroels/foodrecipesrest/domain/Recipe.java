@@ -3,6 +3,9 @@ package eu.christineroels.foodrecipesrest.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +24,16 @@ import java.util.UUID;
 public class Recipe {
     @Id
     private UUID recipeId;
+    @NotBlank
     private String recipeName;
     @OneToMany
     private final List<RecipeStep> recipeSteps = new ArrayList<>();
+    @PositiveOrZero
     private double cookingTime;
+    @Positive
     private double preparationTime;
     private double totalTime;
+    @PositiveOrZero
     private int amountServings;
     private Timestamp createdDate;
     private Timestamp lastUpdatedDate;

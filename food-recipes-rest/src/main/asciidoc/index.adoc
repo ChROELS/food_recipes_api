@@ -18,3 +18,20 @@ include::{snippets}/food/recipe-get/response-body.adoc[]
 
 Response Fields:
 include::{snippets}/food/recipe-get/response-fields.adoc[]
+
+CREATE RECIPE
+One showing how to make a request using cURL:
+include::{snippets}/food/recipe-create/curl-request.adoc
+
+One showing the http request:
+include::{snippets}/food/recipe-create/http-request.adoc
+
+One showing the http response:
+include::{snippets}/food/recipe-create/http-response.adoc
+
+Response Body:
+include::{snippets}/food/recipe-create/response-body.adoc
+Request Fields
+include::{snippets}/food/recipe-create/request-fields.adoc[]
+Response Fields:
+include::{snippets}

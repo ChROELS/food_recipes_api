@@ -15,12 +15,16 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.restdocs.constraints.ConstraintDescriptions;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.web.reactive.server.StatusAssertions;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.util.StringUtils;
 
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
@@ -28,17 +32,19 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
+import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.returns;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 //import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
+import static org.springframework.restdocs.snippet.Attributes.key;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.hamcrest.core.Is.is;
 
@@ -109,14 +115,50 @@ class RecipeControllerTest {
 
 
     }
-
-
-
     @Test
-    public void updateRecipe(){}
+    public void updateRecipe() throws Exception {
+
+    }
+    //Test returns status 400 BAD REQUEST Why?
     @Test
-    public void createRecipe(){}
+    public void createRecipe() throws Exception {
+        //given
+        validRecipe.setRecipeId(UUID.randomUUID());
+        validRecipe.setRecipeName("Saved Recipe");
+        String recipeDtoJson = objectMapper.writeValueAsString(validRecipe);
+        ConstrainedFields fields = new ConstrainedFields(RecipeDto.class);
+        given(recipeService.saveNewRecipe(any())).willReturn(validRecipe);
+
+
+        mockMvc.perform(RestDocumentationRequestBuilders.post("/api/food/recipes/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(recipeDtoJson))
+        //then
+            .andExpect(status().isCreated())
+        //Documenting post request
+       .andDo(document("food/recipe-create",
+                requestFields(fields.withPath("recipeId").ignored(),
+                        fields.withPath("createdDate").ignored(),
+                        fields.withPath("lastUpdatedDate").ignored(),
+                        fields.withPath("totalTime").ignored(),
+                        //fields that actually need to be filled to create a recipe
+                        fields.withPath("recipeName").description("Recipe Name"),
+                        fieldWithPath("cookingTime").description("Recipe cooking time"),
+                        fieldWithPath("preparationTime").description("Recipe preparation time"),
+                        fieldWithPath("amountServings").description("Recipe amount of servings"))
+                ));
+    }
     @Test
     public void deleteRecipe(){}
-
+    //Documenting Constraint validation
+    private static class ConstrainedFields{
+        private final ConstraintDescriptions constraintDescriptions;
+        ConstrainedFields(Class<?> input){
+            this.constraintDescriptions = new ConstraintDescriptions(input);
+        }
+        private FieldDescriptor withPath(String path){
+            return fieldWithPath(path).attributes(key("constraints").value(StringUtils.collectionToDelimitedString(this.constraintDescriptions
+                    .descriptionsForProperty(path), ". ")));
+        }
+    }
 }
