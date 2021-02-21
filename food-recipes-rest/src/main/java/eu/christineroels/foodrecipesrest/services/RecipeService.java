@@ -9,6 +9,6 @@ public interface RecipeService {
     RecipeDto getRecipeById(UUID recipeId);
     RecipeDto updateRecipe(UUID recipeId, RecipeDto recipeDto);
     void deleteRecipe(UUID recipeId);
-    void saveNewRecipe(RecipeDto recipeDto);
+    RecipeDto saveNewRecipe(RecipeDto recipeDto);
 
 }

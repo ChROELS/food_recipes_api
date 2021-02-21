@@ -1,0 +1,7 @@
+[source,http,options="nowrap"]
+----
+GET /api/food/recipes/784972ad-8f56-400c-89d8-de1804dcf256 HTTP/1.1
+Accept: application/json
+Host: localhost:8080
+
+----
