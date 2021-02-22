@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ http DELETE 'http://localhost:8080/api/food/recipes/delete/3e7e61e6-83c3-4bbf-9538-7952ec8aa105' \
+    'Accept:application/json'
+----

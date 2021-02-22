@@ -29,11 +29,25 @@ public class RecipeController {
     public ResponseEntity<RecipeDto> getRecipeById(@PathVariable("recipeId") UUID recipeId){
         return new ResponseEntity<>(recipeService.getRecipeById(recipeId), HttpStatus.OK);
     }
-    @PostMapping
+    @PostMapping(path ={"/new"}, produces = {"application/json"})
     public ResponseEntity<RecipeDto> createRecipe(@Valid @RequestBody RecipeDto recipeDto){
         RecipeDto savedRecipe = recipeService.saveNewRecipe(recipeDto);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", "/api/food/recipes/new/"+savedRecipe.getRecipeId().toString());
-        return new ResponseEntity<>(headers,HttpStatus.CREATED);
+        headers.add("Recipe Created", "Recipe has been created");
+        return new ResponseEntity<>(savedRecipe,headers,HttpStatus.CREATED);
+    }
+    @DeleteMapping(path={"/delete/{recipeId}"},produces = {"application/json"})
+    public ResponseEntity<RecipeDto> deleteRecipe(@PathVariable("recipeId")UUID recipeId){
+        RecipeDto recipeToDelete = recipeService.getRecipeById(recipeId);
+        HttpHeaders headers = new HttpHeaders();
+        if(recipeService.containsRecipe(recipeToDelete)){
+            recipeService.deleteRecipe(recipeId);
+            headers.add("ResponseOK","Recipe has been deleted");
+            //Returns an http status OK and a response body as string to inform the user
+            return new ResponseEntity<>(recipeToDelete,headers,HttpStatus.OK);
+        }
+        //Returns an http status OK and a response body as string to inform the user
+        headers.add("ResponseNotOK","Recipe does not exist");
+        return new ResponseEntity<>(recipeToDelete,headers,HttpStatus.BAD_REQUEST);
     }
 }

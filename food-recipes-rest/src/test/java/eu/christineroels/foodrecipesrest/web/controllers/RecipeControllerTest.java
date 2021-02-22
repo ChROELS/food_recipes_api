@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.christineroels.foodrecipesrest.services.RecipeService;
 import eu.christineroels.foodrecipesrest.web.models.RecipeDto;
 import org.hamcrest.core.Is;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
@@ -78,7 +79,12 @@ class RecipeControllerTest {
         validRecipe.setCreatedDate(OffsetDateTime.now());
         validRecipe.setLastUpdatedDate(OffsetDateTime.now());
     }
-
+    //always reset the service since it will be called by each test method
+    //and with WebMvcTest we are loading the 'real' app beerService in the testing environment
+    @AfterEach
+    void tearDown() {
+        reset(recipeService);
+    }
     @Test
     public void getRecipeById() throws Exception {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(
@@ -98,9 +104,9 @@ class RecipeControllerTest {
                 .andExpect(jsonPath("$.amountServings", Is.is(4)))
                 .andExpect(jsonPath("$.createdDate", Is.is(dateTimeFormatter.format(
                         validRecipe.getCreatedDate()))))
+                //documenting response
                 .andDo(document("food/recipe-get", pathParameters(
                         parameterWithName("recipeId").description("UUID of desired recipe to get.")),
-                        //documenting response
                         responseFields(fieldWithPath("recipeId").description("Recipe Id").type(UUID.class),
                                 fieldWithPath("recipeName").description("Recipe Name"),
                                 fieldWithPath("cookingTime").description("Recipe cooking time"),
@@ -119,7 +125,7 @@ class RecipeControllerTest {
     public void updateRecipe() throws Exception {
 
     }
-    //Test returns status 400 BAD REQUEST Why?
+    //Test returns status 415 unsupported media type
     @Test
     public void createRecipe() throws Exception {
         //given
@@ -128,13 +134,16 @@ class RecipeControllerTest {
         String recipeDtoJson = objectMapper.writeValueAsString(validRecipe);
         ConstrainedFields fields = new ConstrainedFields(RecipeDto.class);
         given(recipeService.saveNewRecipe(any())).willReturn(validRecipe);
-
-
-        mockMvc.perform(RestDocumentationRequestBuilders.post("/api/food/recipes/")
-                .contentType(MediaType.APPLICATION_JSON)
+        //when
+        mockMvc.perform(RestDocumentationRequestBuilders.post("/api/food/recipes/new")
+                .contentType(MediaType.ALL)
                 .content(recipeDtoJson))
         //then
-            .andExpect(status().isCreated())
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(header().exists("Recipe Created"))
+
+
         //Documenting post request
        .andDo(document("food/recipe-create",
                 requestFields(fields.withPath("recipeId").ignored(),
@@ -149,7 +158,49 @@ class RecipeControllerTest {
                 ));
     }
     @Test
-    public void deleteRecipe(){}
+    public void deleteRecipeNotFound() throws Exception {
+        //Given
+        given(recipeService.getRecipeById(any())).willReturn(validRecipe);
+        given(recipeService.containsRecipe(validRecipe)).willReturn(false);
+        mockMvc.perform(delete("/api/food/recipes/delete/{recipeId}",validRecipe.getRecipeId().toString())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                //using JayWay annotation to assert return of the desired object
+                .andExpect(jsonPath("$.recipeId", Is.is(validRecipe.getRecipeId().toString())))
+                .andExpect(jsonPath("$.amountServings", Is.is(4)))
+                //headers
+                .andExpect(header().exists("ResponseNotOK"))
+                //documenting response
+                .andDo(document("food/recipe-delete",
+                        pathParameters(parameterWithName("recipeId").description("UUID of desired recipe to delete.")),
+                        responseFields(fieldWithPath("recipeId").description("Recipe Id").type(UUID.class),
+                                fieldWithPath("recipeName").description("Recipe Name"),
+                                fieldWithPath("cookingTime").description("Recipe cooking time"),
+                                fieldWithPath("preparationTime").description("Recipe preparation time"),
+                                fieldWithPath("amountServings").description("Recipe amount of servings"),
+                                fieldWithPath("totalTime").description("Recipe total time of preparation including cooking time"),
+                                fieldWithPath("createdDate").description("Date of creation").type(OffsetDateTime.class),
+                                fieldWithPath("lastUpdatedDate").description("Last update").type(OffsetDateTime.class)
+                        )));
+    }
+    @Test
+    public void deleteRecipeFound() throws Exception {
+        //Given
+        given(recipeService.getRecipeById(any())).willReturn(validRecipe);
+        given(recipeService.containsRecipe(validRecipe)).willReturn(true);
+        //When
+        mockMvc.perform(delete("/api/food/recipes/delete/{recipeId}",validRecipe.getRecipeId().toString())
+                .accept(MediaType.APPLICATION_JSON))
+                //Then
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                //using JayWay annotation to assert return of the desired object
+                .andExpect(jsonPath("$.recipeId", Is.is(validRecipe.getRecipeId().toString())))
+                .andExpect(jsonPath("$.amountServings", Is.is(4)))
+                //headers
+                .andExpect(header().exists("ResponseOK"));
+    }
     //Documenting Constraint validation
     private static class ConstrainedFields{
         private final ConstraintDescriptions constraintDescriptions;

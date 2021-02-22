@@ -6,6 +6,7 @@ import eu.christineroels.foodrecipesrest.web.models.RecipeDto;
 import java.util.UUID;
 
 public interface RecipeService {
+    boolean containsRecipe(RecipeDto recipe);
     RecipeDto getRecipeById(UUID recipeId);
     RecipeDto updateRecipe(UUID recipeId, RecipeDto recipeDto);
     void deleteRecipe(UUID recipeId);
