@@ -1,0 +1,7 @@
+[source,http,options="nowrap"]
+----
+DELETE /api/food/recipes/delete/3e7e61e6-83c3-4bbf-9538-7952ec8aa105 HTTP/1.1
+Accept: application/json
+Host: localhost:8080
+
+----

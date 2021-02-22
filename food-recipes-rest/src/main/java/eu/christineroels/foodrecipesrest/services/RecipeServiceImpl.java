@@ -7,6 +7,7 @@ import eu.christineroels.foodrecipesrest.web.models.RecipeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -18,6 +19,15 @@ public class RecipeServiceImpl implements RecipeService {
         this.recipeRepository = recipeRepository;
         this.recipeMapper = recipeMapper;
     }
+
+    @Override
+    public boolean containsRecipe(RecipeDto recipe) {
+        Recipe recipe1 = recipeMapper.recipeDtoToRecipe(recipe);
+        Optional<Recipe> foundRecipe = recipeRepository.findById(recipe1.getRecipeId());
+        return foundRecipe.isPresent();
+
+    }
+
     @Override
     public RecipeDto getRecipeById(UUID recipeId) {
         Recipe recipeReturned = recipeRepository.getOne(recipeId);

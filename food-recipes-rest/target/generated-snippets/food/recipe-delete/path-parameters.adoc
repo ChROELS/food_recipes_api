@@ -1,0 +1,8 @@
+.+/api/food/recipes/delete/{recipeId}+
+|===
+|Parameter|Description
+
+|`+recipeId+`
+|UUID of desired recipe to delete.
+
+|===

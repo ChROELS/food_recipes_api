@@ -35,3 +35,20 @@ Request Fields
 include::{snippets}/food/recipe-create/request-fields.adoc[]
 Response Fields:
 include::{snippets}
+
+DELETE RECIPE
+
+One showing how to make a request using cURL:
+include::{snippets}/food/recipe-delete/curl-request.adoc[]
+
+One showing the HTTP request:
+include::{snippets}/food/recipe-delete/http-request.adoc[]
+
+One showing the HTTP response:
+include::{snippets}/food/recipe-delete/http-response.adoc[]
+
+Response Body:
+include::{snippets}/food/recipe-delete/response-body.adoc[]
+
+Response Fields:
+include::{snippets}/food/recipe-delete/response-fields.adoc[]
