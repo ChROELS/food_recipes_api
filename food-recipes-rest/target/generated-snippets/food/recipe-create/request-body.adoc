@@ -1,4 +1,4 @@
 [source,options="nowrap"]
 ----
-{"recipeId":"3f9f2d09-6b9a-482b-bf22-13937f59b22c","recipeName":"Saved Recipe","cookingTime":143.0,"preparationTime":30.0,"totalTime":173.0,"amountServings":4,"createdDate":"2021-02-21T19:11:25+0100","lastUpdatedDate":"2021-02-21T19:11:25+0100"}
+{"recipeId":null,"recipeName":"Recipe Found","cookingTime":143.0,"preparationTime":30.0,"totalTime":173.0,"amountServings":4,"createdDate":"2021-02-25T16:03:49+0100","lastUpdatedDate":"2021-02-25T16:03:49+0100"}
 ----

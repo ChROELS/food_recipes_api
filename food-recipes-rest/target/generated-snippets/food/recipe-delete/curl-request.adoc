@@ -1,5 +1,5 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/api/food/recipes/delete/3e7e61e6-83c3-4bbf-9538-7952ec8aa105' -i -X DELETE \
+$ curl 'http://localhost:8080/api/food/recipes/delete/d5d9db4e-8264-480b-9ffe-541089a90192' -i -X DELETE \
     -H 'Accept: application/json'
 ----

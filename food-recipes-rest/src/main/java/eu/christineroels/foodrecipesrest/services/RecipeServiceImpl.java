@@ -7,6 +7,8 @@ import eu.christineroels.foodrecipesrest.web.models.RecipeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 @Service
@@ -37,10 +39,16 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public RecipeDto updateRecipe(UUID recipeId, RecipeDto recipeDto) {
         if(recipeRepository.existsById(recipeId)){
-            recipeRepository.deleteById(recipeId);
-            Recipe recipe = recipeMapper.recipeDtoToRecipe(recipeDto);
-            recipeRepository.save(recipe);
-            return recipeDto;
+            Recipe recipe = recipeRepository.getOne(recipeId);
+            Recipe newValuesRecipe = recipeMapper.recipeDtoToRecipe(recipeDto);
+            recipe.setRecipeName(newValuesRecipe.getRecipeName());
+            recipe.setAmountServings(newValuesRecipe.getAmountServings());
+            recipe.setCookingTime(newValuesRecipe.getCookingTime());
+            recipe.setPreparationTime(newValuesRecipe.getPreparationTime());
+            recipe.setTotalTime();
+            recipe.setLastUpdatedDate(Timestamp.valueOf(LocalDateTime.now()));
+            Recipe recipeUpdated = recipeRepository.save(recipe);
+            return recipeMapper.recipeToRecipeDto(recipeUpdated);
         }else{
             //To Do
             throw new RuntimeException("Not Found");

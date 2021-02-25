@@ -1,0 +1,4 @@
+[source,options="nowrap"]
+----
+{"recipeId":null,"recipeName":null,"cookingTime":0.0,"preparationTime":0.0,"totalTime":0.0,"amountServings":0,"createdDate":null,"lastUpdatedDate":null}
+----

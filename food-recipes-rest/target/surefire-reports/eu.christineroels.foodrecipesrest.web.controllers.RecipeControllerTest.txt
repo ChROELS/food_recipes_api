@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: eu.christineroels.foodrecipesrest.web.controllers.RecipeControllerTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 2.585 s <<< FAILURE! - in eu.christineroels.foodrecipesrest.web.controllers.RecipeControllerTest
+eu.christineroels.foodrecipesrest.web.controllers.RecipeControllerTest.updateRecipeFound  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: Response should contain header 'ResponseOK'
+	at eu.christineroels.foodrecipesrest.web.controllers.RecipeControllerTest.updateRecipeFound(RecipeControllerTest.java:151)
+
+eu.christineroels.foodrecipesrest.web.controllers.RecipeControllerTest.createRecipe  Time elapsed: 0.016 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<201> but was:<400>
+	at eu.christineroels.foodrecipesrest.web.controllers.RecipeControllerTest.createRecipe(RecipeControllerTest.java:172)
+
