@@ -5,5 +5,5 @@ ResponseNotOK: Recipe does not exist
 Content-Type: application/json
 Content-Length: 245
 
-{"recipeId":"3e7e61e6-83c3-4bbf-9538-7952ec8aa105","recipeName":"Recipe Found","cookingTime":143.0,"preparationTime":30.0,"totalTime":173.0,"amountServings":4,"createdDate":"2021-02-22T18:07:18+0100","lastUpdatedDate":"2021-02-22T18:07:18+0100"}
+{"recipeId":"d5d9db4e-8264-480b-9ffe-541089a90192","recipeName":"Recipe Found","cookingTime":143.0,"preparationTime":30.0,"totalTime":173.0,"amountServings":4,"createdDate":"2021-02-25T16:03:49+0100","lastUpdatedDate":"2021-02-25T16:03:49+0100"}
 ----

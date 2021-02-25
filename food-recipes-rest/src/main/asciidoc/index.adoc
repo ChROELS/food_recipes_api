@@ -36,6 +36,23 @@ include::{snippets}/food/recipe-create/request-fields.adoc[]
 Response Fields:
 include::{snippets}
 
+PUT RECIPE
+One showing how to make a request using cURL:
+include::{snippets}/food/recipe-put/curl-request.adoc
+
+One showing the http request:
+include::{snippets}/food/recipe-put/http-request.adoc
+
+One showing the http response:
+include::{snippets}/food/recipe-put/http-response.adoc
+
+Response Body:
+include::{snippets}/food/recipe-put/response-body.adoc
+Request Fields
+include::{snippets}/food/recipe-put/request-fields.adoc[]
+Response Fields:
+include::{snippets}
+
 DELETE RECIPE
 
 One showing how to make a request using cURL:

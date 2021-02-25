@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ echo '{"recipeId":null,"recipeName":"Recipe Name Updated","cookingTime":1.0,"preparationTime":0.3,"totalTime":1.3,"amountServings":3,"createdDate":null,"lastUpdatedDate":null}' | http PUT 'http://localhost:8080/api/food/recipes/update/f13f2bac-9891-4712-985e-c7100d91494f' \
+    'Content-Type:application/json;charset=UTF-8'
+----

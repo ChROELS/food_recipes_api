@@ -2,20 +2,21 @@ package eu.christineroels.foodrecipesrest.web.controllers;
 
 import eu.christineroels.foodrecipesrest.services.RecipeService;
 import eu.christineroels.foodrecipesrest.web.models.RecipeDto;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.HttpMediaTypeNotAcceptableException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
-
-@RequestMapping("/api/food/recipes/")
+@Slf4j
+@RequestMapping("/api/food/recipes")
 @RestController
 public class RecipeController {
     private final RecipeService recipeService;
@@ -29,7 +30,7 @@ public class RecipeController {
     public ResponseEntity<RecipeDto> getRecipeById(@PathVariable("recipeId") UUID recipeId){
         return new ResponseEntity<>(recipeService.getRecipeById(recipeId), HttpStatus.OK);
     }
-    @PostMapping(path ={"/new"}, produces = {"application/json"})
+    @PostMapping(path ={"/new"},consumes = {"application/json"},produces = {"application/json"})
     public ResponseEntity<RecipeDto> createRecipe(@Valid @RequestBody RecipeDto recipeDto){
         RecipeDto savedRecipe = recipeService.saveNewRecipe(recipeDto);
         HttpHeaders headers = new HttpHeaders();
@@ -43,11 +44,29 @@ public class RecipeController {
         if(recipeService.containsRecipe(recipeToDelete)){
             recipeService.deleteRecipe(recipeId);
             headers.add("ResponseOK","Recipe has been deleted");
-            //Returns an http status OK and a response body as string to inform the user
+            //Returns an http status OK, a json message and a response header as string
             return new ResponseEntity<>(recipeToDelete,headers,HttpStatus.OK);
         }
-        //Returns an http status OK and a response body as string to inform the user
+        //Returns an http status NOT OK, a json message and a response header as string
         headers.add("ResponseNotOK","Recipe does not exist");
         return new ResponseEntity<>(recipeToDelete,headers,HttpStatus.BAD_REQUEST);
     }
+    @PutMapping(path={"/update/{recipeId}"},produces = {"application/json"})
+    public ResponseEntity<RecipeDto> updateRecipe(@PathVariable("recipeId")UUID recipeId, @Valid @RequestBody RecipeDto recipeDto) {
+        HttpHeaders headers = new HttpHeaders();
+        RecipeDto updated = recipeService.updateRecipe(recipeId, recipeDto);
+        headers.add("ResponseOK", "Recipe has been updated");
+        return new ResponseEntity<>(updated, headers, HttpStatus.OK);
+    }
+
+    @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
+    public String handleHttpMediaTypeNotAcceptableException() {
+        return "acceptable MIME type:" + MediaType.APPLICATION_JSON;
+    }
+
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    public String handleHttpMediaTypeNotSupportedException() {
+        return "acceptable MIME type:" + MediaType.APPLICATION_JSON;
+    }
+
 }

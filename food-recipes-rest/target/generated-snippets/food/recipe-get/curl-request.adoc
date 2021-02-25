@@ -1,5 +1,5 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/api/food/recipes/784972ad-8f56-400c-89d8-de1804dcf256' -i -X GET \
+$ curl 'http://localhost:8080/api/food/recipes/1be196c9-2004-446a-b73a-1ec12948979f' -i -X GET \
     -H 'Accept: application/json'
 ----

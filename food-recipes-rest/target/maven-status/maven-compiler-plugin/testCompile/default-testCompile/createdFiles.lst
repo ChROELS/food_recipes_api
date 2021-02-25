@@ -1,0 +1,7 @@
+eu\christineroels\foodrecipesrest\domain\RecipeTest.class
+eu\christineroels\foodrecipesrest\domain\IngredientTest.class
+eu\christineroels\foodrecipesrest\domain\MeasureUTest.class
+eu\christineroels\foodrecipesrest\services\RecipeServiceImplTest.class
+eu\christineroels\foodrecipesrest\web\controllers\RecipeControllerTest$ConstrainedFields.class
+eu\christineroels\foodrecipesrest\FoodRecipesRestApplicationTests.class
+eu\christineroels\foodrecipesrest\web\controllers\RecipeControllerTest.class

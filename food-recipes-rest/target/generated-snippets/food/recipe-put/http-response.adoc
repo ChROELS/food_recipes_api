@@ -1,0 +1,9 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+ResponseOK: Recipe has been updated
+Content-Type: application/json
+Content-Length: 152
+
+{"recipeId":null,"recipeName":null,"cookingTime":0.0,"preparationTime":0.0,"totalTime":0.0,"amountServings":0,"createdDate":null,"lastUpdatedDate":null}
+----
