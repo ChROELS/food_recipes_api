@@ -1,7 +1,7 @@
 [source,http,options="nowrap"]
 ----
 HTTP/1.1 200 OK
-ResponseOK: Recipe has been updated
+Location: /api/food/recipes/null
 Content-Type: application/json
 Content-Length: 152
 

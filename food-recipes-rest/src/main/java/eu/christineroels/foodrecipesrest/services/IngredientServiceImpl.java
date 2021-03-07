@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,9 +43,7 @@ public class IngredientServiceImpl implements IngredientService{
     public IngredientDto updateIngredient(UUID ingredientId, IngredientDto ingredientDto) {
         if(ingredientRepository.existsById(ingredientId)) {
             Ingredient ingredientToUpdate = ingredientRepository.getOne(ingredientId);
-            ingredientRepository.delete(ingredientToUpdate);
             ingredientToUpdate.setName(ingredientDto.getName());
-            ingredientToUpdate.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
             ingredientToUpdate.setLastUpdatedDate(Timestamp.valueOf(LocalDateTime.now()));
             ingredientRepository.save(ingredientToUpdate);
             return ingredientMapper.ingredientToDto(ingredientToUpdate);
@@ -67,13 +66,28 @@ public class IngredientServiceImpl implements IngredientService{
         List<Ingredient> allMatching = new ArrayList<>();
         for (Ingredient ig: allSorted
              ) {
-            if(ig.getName().equalsIgnoreCase(name)){
+            if(Arrays.stream(ig.getName().split(" ")).anyMatch(el -> el.equalsIgnoreCase(name))){
                 allMatching.add(ig);
             }
         }
+        return mapList(allMatching);
+    }
+
+    @Override
+    public List<IngredientDto> getAll() {
+        List<Ingredient> all = ingredientRepository.findAll();
+        return mapList(all);
+    }
+
+    @Override
+    public boolean containsIngredientId(UUID ingredientId) {
+        return ingredientRepository.existsById(ingredientId);
+    }
+
+    private List<IngredientDto> mapList(List<Ingredient> sourceList){
         List<IngredientDto> ingredientDtoList = new ArrayList<>();
-        for (Ingredient ign: allMatching
-             ) {
+        for (Ingredient ign: sourceList
+        ) {
             ingredientDtoList.add(ingredientMapper.ingredientToDto(ign));
         }
         return ingredientDtoList;

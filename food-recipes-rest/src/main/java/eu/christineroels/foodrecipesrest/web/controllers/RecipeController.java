@@ -30,11 +30,11 @@ public class RecipeController {
     public ResponseEntity<RecipeDto> getRecipeById(@PathVariable("recipeId") UUID recipeId){
         return new ResponseEntity<>(recipeService.getRecipeById(recipeId), HttpStatus.OK);
     }
-    @PostMapping(path ={"/new"},consumes = {"application/json"},produces = {"application/json"})
+    @PostMapping(path ={""},consumes = {"application/json"},produces = {"application/json"})
     public ResponseEntity<RecipeDto> createRecipe(@Valid @RequestBody RecipeDto recipeDto){
         RecipeDto savedRecipe = recipeService.saveNewRecipe(recipeDto);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Recipe Created", "Recipe has been created");
+        headers.add("Location", "/api/food/recipes/"+savedRecipe.getRecipeId());
         return new ResponseEntity<>(savedRecipe,headers,HttpStatus.CREATED);
     }
     @DeleteMapping(path={"/delete/{recipeId}"},produces = {"application/json"})
@@ -43,19 +43,17 @@ public class RecipeController {
         HttpHeaders headers = new HttpHeaders();
         if(recipeService.containsRecipe(recipeToDelete)){
             recipeService.deleteRecipe(recipeId);
-            headers.add("ResponseOK","Recipe has been deleted");
-            //Returns an http status OK, a json message and a response header as string
+            headers.add("Status","200 OK");
+            //Returns an http status OK, a json message and a response header
             return new ResponseEntity<>(recipeToDelete,headers,HttpStatus.OK);
         }
-        //Returns an http status NOT OK, a json message and a response header as string
-        headers.add("ResponseNotOK","Recipe does not exist");
-        return new ResponseEntity<>(recipeToDelete,headers,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(recipeToDelete,HttpStatus.BAD_REQUEST);
     }
-    @PutMapping(path={"/update/{recipeId}"},produces = {"application/json"})
+    @PutMapping(path={"/{recipeId}"},produces = {"application/json"})
     public ResponseEntity<RecipeDto> updateRecipe(@PathVariable("recipeId")UUID recipeId, @Valid @RequestBody RecipeDto recipeDto) {
         HttpHeaders headers = new HttpHeaders();
         RecipeDto updated = recipeService.updateRecipe(recipeId, recipeDto);
-        headers.add("ResponseOK", "Recipe has been updated");
+        headers.add("Location", "/api/food/recipes/"+updated.getRecipeId());
         return new ResponseEntity<>(updated, headers, HttpStatus.OK);
     }
 

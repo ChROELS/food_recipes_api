@@ -1,0 +1,20 @@
+|===
+|Path|Type|Description
+
+|`+ingredientId+`
+|`+class java.util.UUID+`
+|Ingredient Id
+
+|`+name+`
+|`+String+`
+|Ingredient Name
+
+|`+createdDate+`
+|`+class java.time.OffsetDateTime+`
+|Date of creation
+
+|`+lastUpdatedDate+`
+|`+class java.time.OffsetDateTime+`
+|Date of last update
+
+|===

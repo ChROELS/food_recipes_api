@@ -1,0 +1,20 @@
+|===
+|Path|Type|Description
+
+|`+ingredientId+`
+|`+String+`
+|Id of the ingredient that has been updated
+
+|`+name+`
+|`+String+`
+|New ingredient name after update
+
+|`+createdDate+`
+|`+String+`
+|Date of creation of the ingredient that has been updated
+
+|`+lastUpdatedDate+`
+|`+String+`
+|Last date of update
+
+|===

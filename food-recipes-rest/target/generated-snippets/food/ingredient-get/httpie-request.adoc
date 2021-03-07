@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ http GET 'http://localhost:8080/api/food/ingredients/0c761fc9-af0b-48a0-8163-9b25d85de854' \
+    'Content-Type:application/json;charset=UTF-8'
+----

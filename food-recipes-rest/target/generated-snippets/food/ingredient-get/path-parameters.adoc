@@ -1,0 +1,8 @@
+.+/api/food/ingredients/{ingredientId}+
+|===
+|Parameter|Description
+
+|`+ingredientId+`
+|UUID of desired ingredient to get.
+
+|===

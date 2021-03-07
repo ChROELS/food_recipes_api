@@ -1,0 +1,8 @@
+|===
+|Path|Type|Description
+
+|`+name+`
+|`+class java.lang.String+`
+|Ingredient name
+
+|===

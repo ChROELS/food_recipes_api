@@ -78,7 +78,6 @@ public class IngredientServiceImplTest {
         given((ingredientRepository.getOne(igToUpdate.getIngredientId()))).willReturn(igToUpdate);
         given(ingredientMapper.ingredientToDto(igToUpdate)).willReturn(new IngredientDto());
         IngredientDto dto =  ingredientService.updateIngredient(igToUpdate.getIngredientId(),carrot);
-        then(ingredientRepository).should().delete(igToUpdate);
         then(ingredientRepository).should().save(igToUpdate);
         then(ingredientMapper).should().ingredientToDto(igToUpdate);
         Assertions.assertNotNull(dto);

@@ -1,0 +1,24 @@
+|===
+|Path|Type|Description
+
+|`+[]+`
+|`+Array+`
+|An array of ingredients with a common component or quality.
+
+|`+[].ingredientId+`
+|`+class java.util.UUID+`
+|Ingredient Id
+
+|`+[].name+`
+|`+String+`
+|Ingredient Name
+
+|`+[].createdDate+`
+|`+class java.time.OffsetDateTime+`
+|Date of creation
+
+|`+[].lastUpdatedDate+`
+|`+class java.time.OffsetDateTime+`
+|Date of last update
+
+|===

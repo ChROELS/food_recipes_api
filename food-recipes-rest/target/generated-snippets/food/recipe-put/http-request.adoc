@@ -1,6 +1,6 @@
 [source,http,options="nowrap"]
 ----
-PUT /api/food/recipes/update/f13f2bac-9891-4712-985e-c7100d91494f HTTP/1.1
+PUT /api/food/recipes/2aa93a60-73fc-40de-9257-19f6453f2e80 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Content-Length: 169
 Host: localhost:8080
