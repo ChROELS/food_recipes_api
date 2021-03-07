@@ -1,0 +1,8 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 161
+
+{"ingredientId":"7d2461c1-7423-4e16-a21f-eb852d781c82","name":"Corn Flour","createdDate":"2021-03-07T15:29:53+0100","lastUpdatedDate":"2021-03-07T15:29:53+0100"}
+----

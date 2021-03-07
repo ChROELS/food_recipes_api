@@ -1,9 +1,8 @@
 [source,http,options="nowrap"]
 ----
 HTTP/1.1 400 Bad Request
-ResponseNotOK: Recipe does not exist
 Content-Type: application/json
 Content-Length: 245
 
-{"recipeId":"d5d9db4e-8264-480b-9ffe-541089a90192","recipeName":"Recipe Found","cookingTime":143.0,"preparationTime":30.0,"totalTime":173.0,"amountServings":4,"createdDate":"2021-02-25T16:03:49+0100","lastUpdatedDate":"2021-02-25T16:03:49+0100"}
+{"recipeId":"2f694ba2-6ef6-4fd7-80ef-bc39d14a13de","recipeName":"Recipe Found","cookingTime":143.0,"preparationTime":30.0,"totalTime":173.0,"amountServings":4,"createdDate":"2021-03-07T11:57:55+0100","lastUpdatedDate":"2021-03-07T11:57:55+0100"}
 ----

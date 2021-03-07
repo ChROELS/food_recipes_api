@@ -1,0 +1,8 @@
+.+/api/food/ingredients/all/{name}+
+|===
+|Parameter|Description
+
+|`+name+`
+|Name of a ingredient like 'carrot' or a quality in case ofa composed ingredient like 'flour' for 'rice flour', 'corn flour'.
+
+|===

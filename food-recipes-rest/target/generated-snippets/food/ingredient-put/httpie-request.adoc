@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ echo '{"ingredientId":null,"name":"Corn Flour","createdDate":"2021-03-07T15:29:53+0100","lastUpdatedDate":"2021-03-07T15:29:53+0100"}' | http PUT 'http://localhost:8080/api/food/ingredients/59625edc-9f62-4477-a540-f4e834223e50' \
+    'Content-Type:application/json;charset=UTF-8'
+----

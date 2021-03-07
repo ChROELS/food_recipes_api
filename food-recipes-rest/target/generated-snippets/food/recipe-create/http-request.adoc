@@ -1,9 +1,9 @@
 [source,http,options="nowrap"]
 ----
-POST /api/food/recipes/new HTTP/1.1
+POST /api/food/recipes HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Content-Length: 211
 Host: localhost:8080
 
-{"recipeId":null,"recipeName":"Recipe Found","cookingTime":143.0,"preparationTime":30.0,"totalTime":173.0,"amountServings":4,"createdDate":"2021-02-25T16:03:49+0100","lastUpdatedDate":"2021-02-25T16:03:49+0100"}
+{"recipeId":null,"recipeName":"Recipe Found","cookingTime":143.0,"preparationTime":30.0,"totalTime":173.0,"amountServings":4,"createdDate":"2021-03-07T11:57:55+0100","lastUpdatedDate":"2021-03-07T11:57:55+0100"}
 ----

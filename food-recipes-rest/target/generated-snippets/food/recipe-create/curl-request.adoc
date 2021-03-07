@@ -1,6 +1,6 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/api/food/recipes/new' -i -X POST \
+$ curl 'http://localhost:8080/api/food/recipes' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -d '{"recipeId":null,"recipeName":"Recipe Found","cookingTime":143.0,"preparationTime":30.0,"totalTime":173.0,"amountServings":4,"createdDate":"2021-02-25T16:03:49+0100","lastUpdatedDate":"2021-02-25T16:03:49+0100"}'
+    -d '{"recipeId":null,"recipeName":"Recipe Found","cookingTime":143.0,"preparationTime":30.0,"totalTime":173.0,"amountServings":4,"createdDate":"2021-03-07T11:57:55+0100","lastUpdatedDate":"2021-03-07T11:57:55+0100"}'
 ----

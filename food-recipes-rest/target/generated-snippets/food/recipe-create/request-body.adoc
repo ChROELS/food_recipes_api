@@ -1,4 +1,4 @@
 [source,options="nowrap"]
 ----
-{"recipeId":null,"recipeName":"Recipe Found","cookingTime":143.0,"preparationTime":30.0,"totalTime":173.0,"amountServings":4,"createdDate":"2021-02-25T16:03:49+0100","lastUpdatedDate":"2021-02-25T16:03:49+0100"}
+{"recipeId":null,"recipeName":"Recipe Found","cookingTime":143.0,"preparationTime":30.0,"totalTime":173.0,"amountServings":4,"createdDate":"2021-03-07T11:57:55+0100","lastUpdatedDate":"2021-03-07T11:57:55+0100"}
 ----

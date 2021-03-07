@@ -1,9 +1,9 @@
 [source,http,options="nowrap"]
 ----
 HTTP/1.1 201 Created
-Recipe Created: Recipe has been created
+Location: /api/food/recipes/2d4e0756-f06f-40be-b9e5-edbec4ea9714
 Content-Type: application/json
 Content-Length: 245
 
-{"recipeId":"fe03be73-c12a-4cd6-801e-196630fdf91b","recipeName":"Recipe Found","cookingTime":143.0,"preparationTime":30.0,"totalTime":173.0,"amountServings":4,"createdDate":"2021-02-25T16:03:49+0100","lastUpdatedDate":"2021-02-25T16:03:49+0100"}
+{"recipeId":"2d4e0756-f06f-40be-b9e5-edbec4ea9714","recipeName":"Recipe Found","cookingTime":143.0,"preparationTime":30.0,"totalTime":173.0,"amountServings":4,"createdDate":"2021-03-07T11:57:55+0100","lastUpdatedDate":"2021-03-07T11:57:55+0100"}
 ----

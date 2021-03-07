@@ -1,6 +1,7 @@
 package eu.christineroels.foodrecipesrest.web.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eu.christineroels.foodrecipesrest.services.IngredientService;
 import eu.christineroels.foodrecipesrest.services.RecipeService;
 import eu.christineroels.foodrecipesrest.web.models.RecipeDto;
 import org.hamcrest.core.Is;
@@ -48,6 +49,8 @@ class RecipeControllerTest {
 
     @MockBean
     RecipeService recipeService;
+    @MockBean
+    IngredientService ingredientService;
 
     @Autowired
     MockMvc mockMvc;
@@ -114,7 +117,7 @@ class RecipeControllerTest {
         given(recipeService.updateRecipe(any(),any())).willThrow(new RuntimeException());
         String recipeDtoJson = objectMapper.writeValueAsString(validRecipe);
         //when
-        mockMvc.perform(put("/api/food/recipes/update/{recipeId}", validRecipe.getRecipeId().toString())
+        mockMvc.perform(put("/api/food/recipes/{recipeId}", validRecipe.getRecipeId().toString())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(recipeDtoJson))
         //then
@@ -137,12 +140,12 @@ class RecipeControllerTest {
         String recipeDtoJson = objectMapper.writeValueAsString(updatesOfRecipe);
         ConstrainedFields fields = new ConstrainedFields(RecipeDto.class);
         //when
-        mockMvc.perform(put("/api/food/recipes/update/{recipeId}", UUID.randomUUID().toString())
+        mockMvc.perform(put("/api/food/recipes/{recipeId}", UUID.randomUUID().toString())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(recipeDtoJson))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(header().exists("ResponseOK"))
+                .andExpect(header().exists("Location"))
 
         //Documenting put request
                 .andDo(document("food/recipe-put",
@@ -179,13 +182,13 @@ class RecipeControllerTest {
         ConstrainedFields fields = new ConstrainedFields(RecipeDto.class);
         given(recipeService.saveNewRecipe(any())).willReturn(newRecipeDto);
         //when
-        mockMvc.perform(post("/api/food/recipes/new")
+        mockMvc.perform(post("/api/food/recipes")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(recipeDtoJson))
         //then
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(header().exists("Recipe Created"))
+                .andExpect(header().exists("Location"))
         //Documenting post request
        .andDo(document("food/recipe-create",
                 requestFields(fields.withPath("recipeId").ignored(),
@@ -194,9 +197,9 @@ class RecipeControllerTest {
                         fields.withPath("totalTime").ignored(),
                         //fields that actually need to be filled to create a recipe
                         fields.withPath("recipeName").description("Recipe Name"),
-                        fieldWithPath("cookingTime").description("Recipe cooking time"),
-                        fieldWithPath("preparationTime").description("Recipe preparation time"),
-                        fieldWithPath("amountServings").description("Recipe amount of servings"))
+                        fields.withPath("cookingTime").description("Recipe cooking time"),
+                        fields.withPath("preparationTime").description("Recipe preparation time"),
+                        fields.withPath("amountServings").description("Recipe amount of servings"))
                 ));
     }
     @Test
@@ -211,8 +214,6 @@ class RecipeControllerTest {
                 //using JayWay annotation to assert return of the desired object
                 .andExpect(jsonPath("$.recipeId", Is.is(validRecipe.getRecipeId().toString())))
                 .andExpect(jsonPath("$.amountServings", Is.is(4)))
-                //headers
-                .andExpect(header().exists("ResponseNotOK"))
                 //documenting response
                 .andDo(document("food/recipe-delete",
                         pathParameters(parameterWithName("recipeId").description("UUID of desired recipe to delete.")),
@@ -241,7 +242,7 @@ class RecipeControllerTest {
                 .andExpect(jsonPath("$.recipeId", Is.is(validRecipe.getRecipeId().toString())))
                 .andExpect(jsonPath("$.amountServings", Is.is(4)))
                 //headers
-                .andExpect(header().exists("ResponseOK"));
+                .andExpect(header().exists("Status"));
         then(recipeService).should().deleteRecipe(any());
     }
     //Documenting Constraint validation

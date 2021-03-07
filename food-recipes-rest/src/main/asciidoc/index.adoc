@@ -69,3 +69,89 @@ include::{snippets}/food/recipe-delete/response-body.adoc[]
 
 Response Fields:
 include::{snippets}/food/recipe-delete/response-fields.adoc[]
+
+GET INGREDIENT
+
+One showing how to make a request using cURL:
+include::{snippets}/food/ingredient-get/curl-request.adoc[]
+
+One showing the HTTP request:
+include::{snippets}/food/ingredient-get/http-request.adoc[]
+
+One showing the HTTP response:
+include::{snippets}/food/ingredient-get/http-response.adoc[]
+
+Response Body:
+include::{snippets}/food/ingredient-get/response-body.adoc[]
+
+Response Fields:
+include::{snippets}/food/ingredient-get/response-fields.adoc[]
+
+GET ALL INGREDIENTS BY NAME
+
+One showing how to make a request using cURL:
+include::{snippets}/food/ingredient-getAllByName/curl-request.adoc[]
+
+One showing the HTTP request:
+include::{snippets}/food/ingredient-getAllByName/http-request.adoc[]
+
+One showing the HTTP response:
+include::{snippets}/food/ingredient-getAllByName/http-response.adoc[]
+
+Response Body:
+include::{snippets}/food/ingredient-getAllByName/response-body.adoc[]
+
+Response Fields:
+include::{snippets}/food/ingredient-getAllByName/response-fields.adoc[]
+
+GET ALL INGREDIENTS
+
+One showing how to make a request using cURL:
+include::{snippets}/food/ingredient-getAll/curl-request.adoc[]
+
+One showing the HTTP request:
+include::{snippets}/food/ingredient-getAll/http-request.adoc[]
+
+One showing the HTTP response:
+include::{snippets}/food/ingredient-getAll/http-response.adoc[]
+
+Response Body:
+include::{snippets}/food/ingredient-getAll/response-body.adoc[]
+
+Response Fields:
+include::{snippets}/food/ingredient-getAll/response-fields.adoc[]
+
+CREATE INGREDIENT
+
+One showing how to make a request using cURL:
+include::{snippets}/food/ingredient-create/curl-request.adoc
+
+One showing the http request:
+include::{snippets}/food/ingredient-create/http-request.adoc
+
+One showing the http response:
+include::{snippets}/food/ingredient-create/http-response.adoc
+
+Response Body:
+include::{snippets}/food/ingredient-create/response-body.adoc
+Request Fields
+include::{snippets}/food/ingredient-create/request-fields.adoc[]
+Response Fields:
+include::{snippets}
+
+UPDATE INGREDIENT
+One showing how to make a request using cURL:
+include::{snippets}/food/ingredient-put/curl-request.adoc
+
+One showing the http request:
+include::{snippets}/food/ingredient-put/http-request.adoc
+
+One showing the http response:
+include::{snippets}/food/ingredient-put/http-response.adoc
+
+Response Body:
+include::{snippets}/food/ingredient-put/response-body.adoc
+Request Fields
+include::{snippets}/food/ingredient-put/request-fields.adoc[]
+Response Fields:
+include::{snippets}
