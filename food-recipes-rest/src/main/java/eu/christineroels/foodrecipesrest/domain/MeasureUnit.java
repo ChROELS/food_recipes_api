@@ -6,6 +6,7 @@ import java.util.UUID;
 
 @Entity
 public class MeasureUnit {
+
     @Id
     private UUID measureUnitId;
     private String shortSymbol;

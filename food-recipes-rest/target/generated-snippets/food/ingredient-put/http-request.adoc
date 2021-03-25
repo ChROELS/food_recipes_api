@@ -1,9 +1,9 @@
 [source,http,options="nowrap"]
 ----
-PUT /api/food/ingredients/59625edc-9f62-4477-a540-f4e834223e50 HTTP/1.1
+PUT /api/food/ingredients/5840ebff-e9d3-416a-a13c-60724c3b1e47 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Content-Length: 127
 Host: localhost:8080
 
-{"ingredientId":null,"name":"Corn Flour","createdDate":"2021-03-07T15:29:53+0100","lastUpdatedDate":"2021-03-07T15:29:53+0100"}
+{"ingredientId":null,"name":"Corn Flour","createdDate":"2021-03-25T16:26:07+0100","lastUpdatedDate":"2021-03-25T16:26:07+0100"}
 ----

@@ -1,5 +1,5 @@
 [source,bash]
 ----
-$ echo '{"ingredientId":null,"name":"Corn Flour","createdDate":"2021-03-07T15:29:52+0100","lastUpdatedDate":"2021-03-07T15:29:52+0100"}' | http POST 'http://localhost:8080/api/food/ingredients' \
+$ echo '{"ingredientId":null,"name":"Corn Flour","createdDate":"2021-03-25T16:26:07+0100","lastUpdatedDate":"2021-03-25T16:26:07+0100"}' | http POST 'http://localhost:8080/api/food/ingredients' \
     'Content-Type:application/json;charset=UTF-8'
 ----

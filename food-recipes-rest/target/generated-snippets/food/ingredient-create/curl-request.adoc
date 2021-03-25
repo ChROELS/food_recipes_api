@@ -2,5 +2,5 @@
 ----
 $ curl 'http://localhost:8080/api/food/ingredients' -i -X POST \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -d '{"ingredientId":null,"name":"Corn Flour","createdDate":"2021-03-07T15:29:52+0100","lastUpdatedDate":"2021-03-07T15:29:52+0100"}'
+    -d '{"ingredientId":null,"name":"Corn Flour","createdDate":"2021-03-25T16:26:07+0100","lastUpdatedDate":"2021-03-25T16:26:07+0100"}'
 ----
